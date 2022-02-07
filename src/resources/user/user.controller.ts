@@ -5,7 +5,6 @@ import validationMiddleware from '@/middleware/validation.middleware';
 import validate from '@/resources/user/user.validation';
 import UserService from '@/resources/user/user.service';
 import authenticated from '@/middleware/authenticated.middleware';
-import {constants} from "os";
 
 class UserController implements Controller {
     public path = '/users';
@@ -42,7 +41,7 @@ class UserController implements Controller {
                 name,
                 email,
                 password,
-                'user'
+                'USER'
             );
 
             res.status(201).json({ token });
@@ -67,11 +66,8 @@ class UserController implements Controller {
         }
     };
 
-    private getUser = (
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ): Response | void => {
+
+    private getUser = (req: Request, res: Response, next: NextFunction): Response | void => {
         if (!req.user) {
             return next(new HttpException(404, 'No logged in user'));
         }

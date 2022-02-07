@@ -24,8 +24,7 @@ class UserService {
             const accessToken = token.createToken(user);
 
             return accessToken;
-        } catch (error) {
-            // @ts-ignore
+        } catch (error: any) {
             throw new Error(error.message);
         }
     }
@@ -49,7 +48,7 @@ class UserService {
             } else {
                 throw new Error('Wrong credentials given');
             }
-        } catch (error) {
+        } catch (error: any) {
             throw new Error('Unable to create user');
         }
     }

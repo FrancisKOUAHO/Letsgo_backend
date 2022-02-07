@@ -10,6 +10,12 @@ import helmet from 'helmet';
 class App {
     public express: Application;
     public port: number;
+    public  corsOptions = {
+        origin: "*",
+        optionsSuccessStatus: 200,
+        methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+        preflightContinue: false,
+}
 
     constructor(controllers: Controller[], port: number) {
         this.express = express();
@@ -23,7 +29,7 @@ class App {
 
     private initialiseMiddleware(): void {
         this.express.use(helmet());
-        this.express.use(cors());
+        this.express.use(cors(this.corsOptions));
         this.express.use(morgan('dev'));
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
