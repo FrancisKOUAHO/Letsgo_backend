@@ -7,6 +7,12 @@ import ActivityService from '@/resources/activity/activity.service';
 import puppeteer from "puppeteer";
 import activityModel from "@/resources/activity/activity.model";
 
+import * as fs from "fs";
+import moment from "moment";
+
+const Json2csvParser = require("json2csv").Parser;
+
+
 class ActivityController implements Controller {
     public path = '/activities';
     public router = Router();
@@ -22,22 +28,49 @@ class ActivityController implements Controller {
             validationMiddleware(validate.create),
             this.create
         );
-        this.router.post(
-            `${this.path}/search`,
-            this.search
+
+        this.router.get(
+            `${this.path}/download/excel`,
+            this.downloadExcel
         );
 
         this.router.get(
             `${this.path}/search`,
             this.getSearch
         );
+
+        this.router.post(
+            `${this.path}/search`,
+            this.search
+        );
     }
 
-    private create = async (
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ): Promise<Response | void> => {
+    private downloadExcel = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+        activityModel.find({}).lean().exec((err, data) => {
+            if (err)
+                throw err;
+            const csvFields = ['_id', 'title', 'body', 'image', 'fromPerson', 'time', 'forUpTo', 'fromPrice', 'suggestedBy', 'price', 'theLocation', 'number', 'cancellationPolicy'];
+            console.log(csvFields);
+            const json2csvParser = new Json2csvParser({
+                csvFields
+            });
+            const csvData = json2csvParser.parse(data);
+            const dateTime = moment().format('YYYYMMDDhhmmss');
+            fs.writeFile(`downloads/exports/csv-${dateTime}.csv`, csvData, function (error) {
+                if (error)
+                    throw error;
+                return res.status(200).json({
+                    message: `Écriture dans downloads/exports/csv-${dateTime}.csv avec succès !`
+                })
+            });
+            res.status(200).json({
+                message: 'Fichier téléchargé avec succès',
+                data: data
+            })
+        });
+    }
+
+    private create = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
         try {
             const {
                 title,
