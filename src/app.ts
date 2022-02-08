@@ -11,7 +11,7 @@ class App {
     public express: Application;
     public port: number;
     public  corsOptions = {
-        origin: "*",
+        origin: ["https://dashboard.letsg0.fr/", "*"],
         optionsSuccessStatus: 200,
         methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
         preflightContinue: false,
