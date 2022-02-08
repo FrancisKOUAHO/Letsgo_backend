@@ -11,6 +11,7 @@ class UserService {
         name: string,
         email: string,
         password: string,
+        image: any,
         role: string
     ): Promise<string | Error> {
         try {
@@ -18,6 +19,7 @@ class UserService {
                 name,
                 email,
                 password,
+                image,
                 role,
             });
 

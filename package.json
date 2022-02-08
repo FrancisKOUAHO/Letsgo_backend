@@ -51,5 +51,8 @@
     "@/resources": "dist/resources",
     "@/utils": "dist/utils",
     "@/middleware": "dist/middleware"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.5"
   }
 }
