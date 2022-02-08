@@ -46,25 +46,25 @@ class ActivityController implements Controller {
     }
 
     private downloadExcel = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
-        activityModel.find({}).lean().exec((err, data) => {
+        await activityModel.find({}).lean().exec((err, data) => {
             if (err)
                 throw err;
             const csvFields = ['_id', 'title', 'body', 'image', 'fromPerson', 'time', 'forUpTo', 'fromPrice', 'suggestedBy', 'price', 'theLocation', 'number', 'cancellationPolicy'];
-            console.log(csvFields);
             const json2csvParser = new Json2csvParser({
                 csvFields
             });
             const csvData = json2csvParser.parse(data);
             const dateTime = moment().format('YYYYMMDDhhmmss');
-            fs.writeFile(`downloads/exports/csv-${dateTime}.csv`, csvData, function (error) {
+            const filespath = `downloads/exports/csv-${dateTime}.csv`
+            fs.writeFile(filespath, csvData, function (error) {
                 if (error)
                     throw error;
-                return res.status(200).json({
-                    message: `Écriture dans downloads/exports/csv-${dateTime}.csv avec succès !`
+                return res.status(401).json({
+                    message: `impossible d'ecrire dans le ${filespath} avec succès !`
                 })
             });
             res.status(200).json({
-                message: 'Fichier téléchargé avec succès',
+                message: `Écriture dans le ${filespath} avec succès !`,
                 data: data
             })
         });
@@ -103,10 +103,6 @@ class ActivityController implements Controller {
             let what: string = req.body.what;
 
             const URL = 'https://www.koifaire.com/';
-            await page.setViewport({
-                width: 1280,
-                height: 800,
-            });
             console.log('Start scraping');
             await page.goto(URL, {waitUntil: 'networkidle2'});
             await page.waitForTimeout(2000);
