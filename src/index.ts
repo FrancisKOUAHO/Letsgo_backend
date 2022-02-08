@@ -9,7 +9,7 @@ validateEnv();
 
 const app = new App(
     [new ActivityController(), new UserController()],
-    Number(process.env.PORT)
+    Number(process.env.PORT || 80)
 );
 
 app.listen();
