@@ -13,7 +13,7 @@ class App {
     public  corsOptions = {
         origin: ["https://dashboard.letsg0.fr", "https://letsg0.fr", "*"],
         optionsSuccessStatus: 200,
-        methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+        methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH', 'OPTIONS'],
         preflightContinue: false,
 }
 
