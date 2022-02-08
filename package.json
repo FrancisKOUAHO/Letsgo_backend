@@ -45,14 +45,12 @@
     "path": "^0.12.7",
     "puppeteer": "^13.1.3",
     "tsc-watch": "^4.5.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "@faker-js/faker": "^6.0.0-alpha.5"
   },
   "_moduleAliases": {
     "@/resources": "dist/resources",
     "@/utils": "dist/utils",
     "@/middleware": "dist/middleware"
-  },
-  "devDependencies": {
-    "@faker-js/faker": "^6.0.0-alpha.5"
   }
 }
