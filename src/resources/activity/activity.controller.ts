@@ -28,7 +28,6 @@ class ActivityController implements Controller {
             validationMiddleware(validate.create),
             this.create
         );
-
         this.router.get(
             `${this.path}/download/excel`,
             this.downloadExcel
