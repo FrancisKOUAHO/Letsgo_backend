@@ -6,11 +6,8 @@ import validate from '@/resources/activity/activity.validation';
 import ActivityService from '@/resources/activity/activity.service';
 import puppeteer from "puppeteer";
 import activityModel from "@/resources/activity/activity.model";
-
-import * as fs from "fs";
+import xlsx from "xlsx"
 import moment from "moment";
-
-const Json2csvParser = require("json2csv").Parser;
 
 
 class ActivityController implements Controller {
@@ -46,26 +43,28 @@ class ActivityController implements Controller {
 
     private downloadExcel = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
         await activityModel.find({}).lean().exec((err, data) => {
-            if (err)
-                throw err;
-            const csvFields = ['_id', 'title', 'body', 'image', 'fromPerson', 'time', 'forUpTo', 'fromPrice', 'suggestedBy', 'price', 'theLocation', 'number', 'cancellationPolicy'];
-            const json2csvParser = new Json2csvParser({
-                csvFields
-            });
-            const csvData = json2csvParser.parse(data);
-            const dateTime = moment().format('YYYYMMDDhhmmss');
-            const filespath = `downloads/exports/csv-${dateTime}.csv`
-            fs.writeFile(filespath, csvData, function (error) {
-                if (error)
-                    throw error;
-                return res.status(401).json({
-                    message: `impossible d'ecrire dans le ${filespath} avec succès !`
-                })
-            });
-            res.status(200).json({
-                message: `Écriture dans le ${filespath} avec succès !`,
-                data: data
-            })
+            if (err) {
+                return res.status(500).json(
+                    {
+                        success: false,
+                        message: `${err} Télechargement impossible du fichier excel ❌`,
+                    }
+                );
+            } else {
+                const dateTime = moment().format('YYYYMMDDhhmmss');
+                const wb = xlsx.utils.book_new();
+                const ws = xlsx.utils.json_to_sheet(data);
+                let file_excel = `downloads/exports/xlsx-${dateTime}.xlsx`;
+                xlsx.utils.book_append_sheet(wb, ws);
+                let file = xlsx.writeFile(wb, file_excel);
+                return res.status(201).json(
+                    {
+                        data: file,
+                        success: true,
+                        message: "Télechargement du fichier excel ✅",
+                    }
+                );
+            }
         });
     }
 
