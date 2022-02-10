@@ -33,14 +33,14 @@ class UserController implements Controller {
         next: NextFunction
     ): Promise<Response | void> => {
         try {
-            const {name, email, password, image} = req.body;
+            const {name, email, password} = req.body;
 
             const token = await this.UserService.register(
                 name,
                 email,
                 password,
                 this.image,
-                'USER'
+                'utilisateur'
             );
 
             res.status(201).json({token});
@@ -95,13 +95,13 @@ class UserController implements Controller {
                 if (users) {
                     res.status(200).json({
                         succes: true,
-                        message: '',
+                        message: 'succes',
                         data: users
                     })
                 } else {
                     res.status(400).json({
                         succes: false,
-                        message: '',
+                        message: 'not work',
                     })
                 }
             })

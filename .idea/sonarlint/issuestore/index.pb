@@ -1,3 +1,38 @@
 
+9
+	yarn.lock,5/3/53585a096fe3a3b96321113856ae62602995a33b
+<
+package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
+R
+"src/resources/user/user.service.ts,c/e/ce3b007fafd2719988b407186d4eee9ad40736bc
+W
+'src/utils/interfaces/token.interface.ts,7/7/770a9528ee6515fba076a22d468898def64592e4
+U
+%src/resources/user/user.controller.ts,3/a/3afd07e9b84588188fac72092e701aebc00f3ca8
+P
+ src/resources/user/user.model.ts,3/d/3d33665ea3ddabb233eb4d5c9489b1d309e7c0f5
+:
+
+src/app.ts,2/1/216381173f187cf4c2baf119193855699f4bc616
+\
+,src/resources/activity/activity.interface.ts,0/e/0e0b2c92620fc54aaeb7c5dffbf9d2c1736527b5
+Z
+*src/resources/activity/activity.service.ts,f/b/fb2e81e6e460252776e74281c801e95d7c6609cb
+]
+-src/resources/activity/activity.validation.ts,4/f/4f3c31830596e4b2362923e1d5e7d5fa4d35540f
+W
+'src/middleware/validation.middleware.ts,8/b/8bc83c925e09457316f27479fa371925cb7b9e74
+\
+,src/resources/category/category.interface.ts,f/e/fe6ee69f125fa9312fbee5988686c3d29289b2bd
+]
+-src/resources/category/category.validation.ts,a/1/a129782cc5df24bec51a720f3b46b96cba7a159e
+Z
+*src/resources/category/category.service.ts,2/a/2a4b0dcd4cb24b7de48abb91a5e2964462e3e76f
+]
+-src/resources/category/category.controller.ts,5/3/53247d9611c23b5281e029ea2caef4f7c76e4c7e
 ]
 -src/resources/activity/activity.controller.ts,5/a/5a63182d44410e8eed5d7244365c3334d65b11d0
+X
+(src/resources/activity/activity.model.ts,9/0/902e94cc57ebd9378ab6d0bb367932af4ac477fb
+X
+(src/resources/category/category.model.ts,7/a/7a0a26e1219788e062a3a6c6be28a634b0d7e4d3

@@ -1,2 +1,5 @@
 
-Žtypescript:S22343"mArguments 'fromPerson' and 'fromPrice' have the same names but not the same order as the function parameters.(¾µ³Äøÿÿÿÿ
+Mtypescript:S41230"1Refactor this redundant 'await' on a non-promise.(ôÍ¶ð
+Žtypescript:S2234Y"mArguments 'fromPerson' and 'fromPrice' have the same names but not the same order as the function parameters.(¾µ³Äøÿÿÿÿ
+Ztypescript:S1854€"8Remove this useless assignment to variable "activities".(«Ù¦»ùÿÿÿÿ
+Ltypescript:S1117ª"/'error' is already declared in the upper scope.(‚Œ·É

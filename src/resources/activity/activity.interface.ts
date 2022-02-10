@@ -13,5 +13,4 @@ export default interface Activity extends Document {
     theLocation: string;
     number: number;
     cancellationPolicy: string;
-
 }

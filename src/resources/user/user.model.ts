@@ -14,14 +14,12 @@ const UserSchema = new Schema(
         },
         image:{
             type: String,
-            unique: true,
         },
         password: {
             type: String,
         },
         role: {
             type: String,
-            required: true,
         },
     },
     { timestamps: true }
