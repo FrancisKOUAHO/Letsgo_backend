@@ -42,7 +42,7 @@ class ActivityController implements Controller {
     }
 
     private downloadExcel = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
-        await activityModel.find({}).lean().exec((err, data) => {
+        activityModel.find({}).lean().exec((err, data) => {
             if (err) {
                 return res.status(500).json(
                     {
