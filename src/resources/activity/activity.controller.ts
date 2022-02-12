@@ -175,7 +175,6 @@ class ActivityController implements Controller {
 
             }
         });
-
     }
 
 }

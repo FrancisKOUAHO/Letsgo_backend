@@ -4,6 +4,7 @@ import CategoryService from "@/resources/category/category.service";
 import HttpException from "@/utils/exceptions/http.exception";
 import validationMiddleware from "@/middleware/validation.middleware";
 import validate from "@/resources/category/category.validation";
+import CategoryModel from "@/resources/category/category.model";
 
 class CategoryController implements Controller {
     public path = '/categories';
@@ -19,6 +20,11 @@ class CategoryController implements Controller {
             `${this.path}`,
             validationMiddleware(validate.createCategory),
             this.create
+        );
+
+        this.router.get(
+            `${this.path}`,
+            this.getCategories
         );
     }
 
@@ -38,6 +44,25 @@ class CategoryController implements Controller {
         }
 
     };
+
+    private getCategories = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> =>{
+        CategoryModel.find((error, data) => {
+            try {
+                return res.status(200).json({
+                    success: true,
+                    data: data,
+                    message: 'the categories has been successfully recovered!'
+                });
+            } catch (error) {
+                return res.status(400).json({
+                    success: false,
+                    data: error,
+                    message: 'the categories has been successfully recovered!'
+                });
+
+            }
+        });
+    }
 
 }
 
