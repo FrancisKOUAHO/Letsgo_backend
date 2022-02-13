@@ -59,6 +59,7 @@ class App {
             console.log(`App listening on the port ${this.port}`);
         });
     }
+
 }
 
 export default App;

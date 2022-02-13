@@ -12,5 +12,4 @@ const app = new App(
     [new ActivityController(), new UserController(), new CategoryController()],
     Number(process.env.PORT || 80)
 );
-
 app.listen();
