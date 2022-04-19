@@ -137,11 +137,8 @@ class ActivityController implements Controller {
                         activity: activity ? activity.innerText.trim() : null,
                     })
                 });
-
                 console.log(GLOBAL_ACTIVITIES)
-
                 return GLOBAL_ACTIVITIES;
-
             });
 
             console.log(extractedData);

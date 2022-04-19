@@ -6,12 +6,13 @@ import morgan from 'morgan';
 import Controller from '@/utils/interfaces/controller.interface';
 import ErrorMiddleware from '@/middleware/error.middleware';
 import helmet from 'helmet';
+import firebase from 'firebase/compat';
 
 class App {
     public express: Application;
     public port: number;
     public  corsOptions = {
-        origin: ["https://dashboard.letsg0.fr"],
+        origin: ["https://dashboard.letsg0.fr", "http://localhost:3000", "http://localhost:3001"],
         optionsSuccessStatus: 200,
         methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH', 'OPTIONS'],
         preflightContinue: false,

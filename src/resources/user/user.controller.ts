@@ -8,6 +8,10 @@ import authenticated from '@/middleware/authenticated.middleware';
 import userModel from "@/resources/user/user.model";
 import faker from "@faker-js/faker";
 import {CallbackError} from 'mongoose';
+import firebase from '@/utils/config/firebase'
+import {any} from "joi";
+
+
 
 class UserController implements Controller {
     public path = '/users';
@@ -25,6 +29,13 @@ class UserController implements Controller {
         this.router.put(`${this.path}/:id`, this.updateUser);
         this.router.get(`${this.path}`, this.getAllUser);
         this.router.get(`${this.path}`, authenticated, this.getUser);
+
+
+        this.router.get(`${this.path}/getAllUserFirebase`, this.getAllUserFirebase);
+        this.router.post(`${this.path}/registerFirebase`, validationMiddleware(validate.register), this.registerFirebase);
+        this.router.post(`${this.path}/loginFirebase`, validationMiddleware(validate.login), this.loginFirebase);
+
+
     }
 
     private register = async (
@@ -119,6 +130,34 @@ class UserController implements Controller {
 
         res.status(200).send({data: req.user});
     };
+
+
+    private getAllUserFirebase = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const snapshot = await firebase.firestore().collection('users');
+            const data = await snapshot.get();
+            const list = data.docs.map((doc) => doc.data());
+            res.status(200).send({data: list});
+        } catch (e) {
+            res.status(404).send({message: `Error ${e}`});
+        }
+    };
+
+    // TODO TEST API REST FIREBASE
+    private registerFirebase = async (req: Request, res: Response, next: NextFunction) => {
+
+    };
+
+    // TODO TEST API REST FIREBASE
+    private loginFirebase = async (req: Request, res: Response, next: NextFunction) => {
+
+    };
+
 }
 
 export default UserController;
+
+function id(id: any) {
+    throw new Error('Function not implemented.');
+}
+

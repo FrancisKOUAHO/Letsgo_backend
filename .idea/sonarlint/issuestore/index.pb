@@ -3,17 +3,8 @@
 	yarn.lock,5/3/53585a096fe3a3b96321113856ae62602995a33b
 <
 package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
-R
-"src/resources/user/user.service.ts,c/e/ce3b007fafd2719988b407186d4eee9ad40736bc
 W
 'src/utils/interfaces/token.interface.ts,7/7/770a9528ee6515fba076a22d468898def64592e4
-U
-%src/resources/user/user.controller.ts,3/a/3afd07e9b84588188fac72092e701aebc00f3ca8
-P
- src/resources/user/user.model.ts,3/d/3d33665ea3ddabb233eb4d5c9489b1d309e7c0f5
-:
-
-src/app.ts,2/1/216381173f187cf4c2baf119193855699f4bc616
 \
 ,src/resources/activity/activity.interface.ts,0/e/0e0b2c92620fc54aaeb7c5dffbf9d2c1736527b5
 Z
@@ -36,3 +27,16 @@ X
 (src/resources/activity/activity.model.ts,9/0/902e94cc57ebd9378ab6d0bb367932af4ac477fb
 X
 (src/resources/category/category.model.ts,7/a/7a0a26e1219788e062a3a6c6be28a634b0d7e4d3
+:
+
+src/app.ts,2/1/216381173f187cf4c2baf119193855699f4bc616
+P
+ src/resources/user/user.model.ts,3/d/3d33665ea3ddabb233eb4d5c9489b1d309e7c0f5
+T
+$src/resources/user/user.interface.ts,3/7/371acdf6eb143ceba1ef7d943cad9a0cfd9ee67b
+R
+"src/resources/user/user.service.ts,c/e/ce3b007fafd2719988b407186d4eee9ad40736bc
+U
+%src/resources/user/user.validation.ts,8/6/86ff27024d6d745195080515c7817b1b7ede0ae1
+U
+%src/resources/user/user.controller.ts,3/a/3afd07e9b84588188fac72092e701aebc00f3ca8
