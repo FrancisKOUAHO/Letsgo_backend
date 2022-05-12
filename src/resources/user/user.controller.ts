@@ -12,7 +12,6 @@ import firebase from '@/utils/config/firebase'
 import {any} from "joi";
 
 
-
 class UserController implements Controller {
     public path = '/users';
     public router = Router();
@@ -131,6 +130,15 @@ class UserController implements Controller {
         res.status(200).send({data: req.user});
     };
 
+    // TODO TEST API REST FIREBASE
+    private registerFirebase = async (req: Request, res: Response, next: NextFunction) => {
+
+    };
+
+    // TODO TEST API REST FIREBASE
+    private loginFirebase = async (req: Request, res: Response, next: NextFunction) => {
+
+    };
 
     private getAllUserFirebase = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -143,21 +151,8 @@ class UserController implements Controller {
         }
     };
 
-    // TODO TEST API REST FIREBASE
-    private registerFirebase = async (req: Request, res: Response, next: NextFunction) => {
-
-    };
-
-    // TODO TEST API REST FIREBASE
-    private loginFirebase = async (req: Request, res: Response, next: NextFunction) => {
-
-    };
-
 }
 
 export default UserController;
 
-function id(id: any) {
-    throw new Error('Function not implemented.');
-}
 

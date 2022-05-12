@@ -13,6 +13,6 @@ const firebaseConfig = {
 };
 
 
-firebase.initializeApp(firebaseConfig);
+const CONNECT = firebase.initializeApp(firebaseConfig);
 
-export default firebase
+export default CONNECT

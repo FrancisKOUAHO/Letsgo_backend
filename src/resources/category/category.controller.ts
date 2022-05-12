@@ -4,7 +4,9 @@ import CategoryService from "@/resources/category/category.service";
 import HttpException from "@/utils/exceptions/http.exception";
 import validationMiddleware from "@/middleware/validation.middleware";
 import validate from "@/resources/category/category.validation";
-import CategoryModel from "@/resources/category/category.model";
+import categoryModel from "@/resources/category/category.model";
+import puppeteer from "puppeteer";
+import CONNECT from "@/utils/config/firebase";
 
 class CategoryController implements Controller {
     public path = '/categories';
@@ -26,6 +28,11 @@ class CategoryController implements Controller {
             `${this.path}`,
             this.getCategories
         );
+
+        this.router.post(
+            `${this.path}/search`,
+            this.search
+        );
     }
 
 
@@ -45,8 +52,8 @@ class CategoryController implements Controller {
 
     };
 
-    private getCategories = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> =>{
-        CategoryModel.find((error, data) => {
+    private getCategories = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+        categoryModel.find((error, data) => {
             try {
                 return res.status(200).json({
                     success: true,
@@ -62,6 +69,63 @@ class CategoryController implements Controller {
 
             }
         });
+    }
+
+
+    private search = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+
+        try {
+            const browser = await puppeteer.launch({
+                headless: false,
+            });
+            const page = await browser.newPage();
+            let where: string = req.body.where;
+
+            const URL = 'https://www.funbooker.com/fr/category/activites';
+            console.log('Start scraping');
+            await page.setViewport({width: 1366, height: 768});
+            await page.goto(URL, {waitUntil: 'networkidle2'});
+            await page.waitForSelector('input#location');
+            await page.click('input#location');
+            await page.keyboard.type(where);
+            await page.waitForTimeout(3000);
+            await page.keyboard.press('Enter');
+            await page.waitForTimeout(3000);
+
+            const extractedData = await page.evaluate(() => {
+                const GLOBAL_CATEGORIES: any[] = [];
+                const items = document.querySelectorAll('div.owl-item.active');
+                 Array.from(items).map((item, index) => {
+                    const title: any = item.querySelector('div.fb-thumbnail__title');
+                    let image: any = item.querySelector('img.fb-thumbnail__image');
+
+                    GLOBAL_CATEGORIES.push({
+                        index: index,
+                        title: title ? title.innerText.trim() : null,
+                        image: image ? image.src : null,
+                    })
+                })
+                return GLOBAL_CATEGORIES;
+            })
+            const extracted = extractedData.map((doc) => {
+                CONNECT.firestore().collection('categories').doc().set(doc);
+            })
+
+            console.log(`extracted ${extracted}`)
+
+            console.log(extractedData);
+            categoryModel.deleteMany({})
+            await categoryModel.insertMany(extractedData)
+
+
+            return res.status(200).json({
+                success: true,
+                data: extractedData
+            });
+
+        } catch (e) {
+            next(new HttpException(400, 'Cannot scraping data'));
+        }
     }
 
 }

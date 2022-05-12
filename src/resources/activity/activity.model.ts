@@ -3,37 +3,22 @@ import Activity from '@/resources/activity/activity.interface';
 
 const ActivitySchema = new Schema(
     {
-        title: {
+        titleCategory: {
             type: String,
         },
-        body: {
+        title: {
             type: String,
         },
         image: {
             type: String,
         },
-        time: {
-            type: Number,
-        },
-        forUpTo: {
-            type: Number,
-        },
-        fromPerson: {
-            type: String,
-        },
-        suggestedBy: {
-            type: String,
-        },
         price: {
-            type: Number,
-        },
-        theLocation: {
             type: String,
         },
-        number: {
-            type: Number,
+        priceFrom: {
+            type: String,
         },
-        cancellationPolicy: {
+        averageRating: {
             type: String,
         },
     },
