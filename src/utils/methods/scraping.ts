@@ -23,7 +23,7 @@ let Scraping = async (req: Request, res: Response, next: NextFunction): Promise<
             items.forEach((item) => {
                 const titleCategory: any = item.querySelector('p.listing-card__category');
                 const title: any = item.querySelector('div.listing-card > div > p > a');
-                const image: any = item.querySelector('.listing-card__image a img')
+                const image: any = item.querySelector('.listing-card__image a img');
                 const video: any = item.querySelector('div.listing-card > div > a > video');
                 const price: any = item.querySelector('div.listing-card__price');
                 const priceFrom: any = item.querySelector('div.listing-card__price-from');
@@ -33,7 +33,7 @@ let Scraping = async (req: Request, res: Response, next: NextFunction): Promise<
                 GLOBAL_ACTIVITIES.push({
                     titleCategory: titleCategory ? titleCategory.innerText.trim() : null,
                     title: title ? title.innerText.trim() : null,
-                    image: image ? image.currentSrc?.trim() : null,
+                    image: image ? image.currentSrc : null,
                     video: video ? video.currentSrc.trim() : null,
                     price: price ? price.innerText.trim() : null,
                     priceFrom: priceFrom ? priceFrom.innerText.trim() : null,
